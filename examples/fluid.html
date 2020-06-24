@@ -1,94 +1,48 @@
 <!doctype html>
 <html>
+
 <head>
   <meta charset="utf-8">
   <title>videojs-vr Demo</title>
-   <link href="../node_modules/video.js/dist/video-js.css" rel="stylesheet">
-   <link href="../dist/videojs-vr.css" rel="stylesheet">
-   <style type="text/css">
-   .bdAll{
-     position: relative;
-   }
-   .show{
-     position: absolute;
-     width: 100px;
-     height: 100px;
-     background-color: brown;
-     z-index: 2147483690;
-     top: 0;
-   }
-   #one{
-    position: absolute;
-    top: 0;
-    z-index: 2147483690;
-   }
-    </style>
+  <link href="../node_modules/video.js/dist/video-js.css" rel="stylesheet">
+  <link href="../dist/videojs-vr.css" rel="stylesheet">
+  <link href="../dist/css/style.css" rel="stylesheet">
 </head>
+
 <body>
-  <canvas id="one" width="800" height="600" style="border: 1px solid black;"></canvas>
   <div class="bdAll">
-    <div class="show">12312312312312</div>
-  <video id="videojs-vr-player" class="video-js vjs-16-9 vjs-default-skin" controls>
+    <div class="bg">
+      <ul>
+        <li><img src="../dist/images/xunjian_s.png" /></li>
+        <li><img src="../dist/images/renyuan_s.png" /></li>
+        <li><img src="../dist/images/shebei_s.png" /></li>
+        <li><img src="../dist/images/lishi_s.png" /></li>
+      </ul>
+    </div>
+    <video id="videojs-vr-player" class="video-js vjs-16-9 vjs-default-skin" controls>
     <source src="../samples/eagle-360.mp4" type="video/mp4">
   </video>
-</div>
+  </div>
   <ul>
     <li><a href="../">return to main example</a></li>
   </ul>
   <script src="../node_modules/video.js/dist/video.js"></script>
   <script src="../dist/videojs-vr.js"></script>
   <script>
-    (function(window, videojs) {
+    (function (window, videojs) {
       var player = window.player = videojs('videojs-vr-player');
       player.mediainfo = player.mediainfo || {};
       player.mediainfo.projection = '360';
 
       // AUTO is the default and looks at mediainfo
-      var vr = window.vr = player.vr({projection: 'AUTO', debug: true, forceCardboard: false});
+      var vr = window.vr = player.vr({
+        projection: 'AUTO',
+        debug: true,
+        forceCardboard: false
+      });
     }(window, window.videojs));
-    var one = document.getElementById("one");
-			var o  = one.getContext("2d");
-			
-			//矩形的构造函数
-			function Rect (x,y,w,h,col) {
-				this.x = x;
-				this.y = y;
-				this.w = w;
-				this.h = h;
-				this.col = col;
-				drawRect(this)
-			}
-			//绘制矩形
-			function drawRect (obj) {
-				o.beginPath();
-				o.rect(obj.x,obj.y,obj.w,obj.h);
-				o.fillStyle = obj.col;
-				o.fill();
-			}
-			var rt1 = new Rect(100,100,100,50,"blue");
-			one.onmousemove = function () {
-				var ev = ev || window.event;
-				//清除画布上的内容
-				o.clearRect(0,0,one.width,one.height)
-				var mx = ev.clientX;
-				var my = ev.clientY;
-//				drawRect(rt1);
-//                判断指定位置是否在当前绘图路径内部
-                if (o.isPointInPath(mx,my)) {
-					rt1.col = "red"
-				}else{
-					rt1.col  ="blue"
-				}
-				drawRect(rt1);
-			var str = "首页";
-			o.font = "24px Arial";
-			o.fillStyle = "white";
-			
-			//绘制填充字体
-			//strokeText(内容,起始坐标X,起始坐标Y,最大宽度)
-			o.fillText(str,124,132);
-			o.strokeStyle = "blueviolet"
-			}
+
   </script>
 </body>
+
 </html>
